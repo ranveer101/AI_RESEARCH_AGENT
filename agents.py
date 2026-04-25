@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_mistralai import ChatMistralAI
-from langgraph.prebuilt import create_react_agent
+from langchain.agents import create_agent
 
 from tools import scrape_url, web_search
 
@@ -23,14 +23,14 @@ llm = ChatMistralAI(model="mistral-small-latest", temperature=0)
 
 
 def build_researcher_agent():
-    return create_react_agent(
+    return create_agent(
         model=llm,
         tools=[web_search],
     )
 
 
 def build_reader_agent():
-    return create_react_agent(
+    return create_agent(
         model=llm,
         tools=[scrape_url],
     )
