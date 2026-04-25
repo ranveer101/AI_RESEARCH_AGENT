@@ -23,7 +23,7 @@ This project simulates a real-world **AI research workflow** by orchestrating mu
 
 ## ✨ Features
 
-* 🔄 Multi-agent architecture using LangGraph
+* 🔄 Multi-agent architecture using the modern LangChain `create_agent` API and LangGraph
 * 🌐 Web search + content scraping (Tavily + BeautifulSoup)
 * 🧠 RAG pipeline using Chroma + HuggingFace embeddings
 * 📊 Structured research reports (Executive Summary, Findings, Risks, etc.)
