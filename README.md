@@ -1,80 +1,191 @@
-# AI Research Assistant
+# 🚀 AI Research Assistant
 
-A full-stack AI research assistant that searches the web, reads sources, writes a structured research report, and produces a critic review.
+![Python Version](https://img.shields.io/badge/python-3.10%2B-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.100%2B-009688)
+![LangGraph](https://img.shields.io/badge/LangGraph-Agentic-orange)
+![License](https://img.shields.io/badge/license-MIT-green)
 
-## Tech Stack
+An advanced **multi-agent AI system** that performs web search, extracts content, and generates structured research reports with automated critique using LLMs and Retrieval-Augmented Generation (RAG).
 
-- Python
-- FastAPI
-- LangGraph
-- LangChain
-- Mistral AI
-- Tavily Search
-- Chroma / Hugging Face embeddings
-- HTML, CSS, JavaScript
+---
 
-## Setup
+## 🧠 Overview
 
-1. Open PowerShell in this folder.
+This project simulates a real-world **AI research workflow** by orchestrating multiple intelligent agents:
 
-2. Create and activate a virtual environment:
+1. 🔍 **Search Agent** – Finds relevant sources from the web
+2. 📖 **Reader Agent** – Scrapes and extracts useful content
+3. 🧩 **RAG Pipeline** – Stores and retrieves semantic context
+4. ✍️ **Writer Agent** – Generates structured research reports
+5. 🧪 **Critic Agent** – Evaluates and improves output quality
 
-```powershell
-python -m venv .venv
-.\.venv\Scripts\activate
+---
+
+## ✨ Features
+
+* 🔄 Multi-agent architecture using LangGraph
+* 🌐 Web search + content scraping (Tavily + BeautifulSoup)
+* 🧠 RAG pipeline using Chroma + HuggingFace embeddings
+* 📊 Structured research reports (Executive Summary, Findings, Risks, etc.)
+* 🧪 Automated LLM-based critique system
+* ⚡ FastAPI backend with interactive frontend
+* 🎨 Clean UI with real-time pipeline visualization
+
+---
+
+## 🏗️ Tech Stack
+
+### Backend
+
+* FastAPI
+* LangChain + LangGraph
+* Mistral AI (LLM)
+
+### RAG & Data
+
+* Chroma (Vector Database)
+* HuggingFace Embeddings
+* Recursive Text Splitting
+
+### Tools
+
+* Tavily Search API
+* BeautifulSoup (Web Scraping)
+
+### Frontend
+
+* HTML, CSS, JavaScript
+
+---
+
+## ⚙️ How It Works
+
+```mermaid
+graph TD
+    User([User Query]) --> Search[Search Agent]
+    Search -->|Tavily Search| Web[Web Results]
+    Web --> Reader[Reader Agent]
+    Reader -->|Scrape & Extract| RawText[Raw Text]
+    RawText --> Splitter[Text Splitter]
+    Splitter --> Chroma[(Vector DB)]
+    Chroma -->|RAG Retrieval| Context[Relevant Context]
+    Context --> Writer[Writer Agent]
+    Web --> Writer
+    Writer -->|Draft Report| Critic[Critic Agent]
+    Critic -->|Feedback/Score| Writer
+    Writer -->|Final Brief| Report[Final Research Report]
 ```
 
-3. Install dependencies:
+---
 
-```powershell
+## 🚀 Run Locally
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/ranveer101/AI_RESEARCH_AGENT.git
+cd AI_RESEARCH_AGENT
+```
+
+### 2. Create virtual environment
+
+```bash
+python -m venv .venv
+.\.venv\Scripts\activate   # Windows
+```
+
+### 3. Install dependencies
+
+```bash
 pip install -r requirements.txt
 ```
 
-4. Create a `.env` file from `.env.example` and add your API keys:
+### 4. Setup environment variables
 
-```powershell
-copy .env.example .env
+Create `.env` file:
+
+```env
+MISTRAL_API_KEY=your_key_here
+TAVILY_API_KEY=your_key_here
 ```
 
-5. Start the app:
+### 5. Run the app
 
-```powershell
-python -m uvicorn api:app --host 127.0.0.1 --port 8000
+```bash
+uvicorn api:app --host 127.0.0.1 --port 8000
 ```
 
-6. Open the browser:
+### 6. Open in browser
 
-```text
+```
 http://127.0.0.1:8000/
 ```
 
-## Notes
+---
 
-- Do not commit or share your real `.env` file.
-- The first run may download the embedding model, so it can take longer.
-- If port `8000` is busy, use another port, for example:
+## 🌐 Deployment (Render)
 
-```powershell
-python -m uvicorn api:app --host 127.0.0.1 --port 8001
+### Build Command
+
+```bash
+pip install -r requirements.txt
 ```
 
-## Deployment
+### Start Command
 
-This project is optimized for deployment on **Render**, but it also works on Heroku, Railway, or any platform supporting Python/FastAPI.
+```bash
+uvicorn api:app --host 0.0.0.0 --port $PORT
+```
 
-### Deploying to Render (Recommended)
+### Environment Variables
 
-1.  **Push to GitHub**: Push your project to a GitHub repository.
-2.  **Create Web Service**: In the Render dashboard, create a new "Web Service" and connect your repository.
-3.  **Automatic Setup**: Render will automatically detect the `render.yaml` file in the root directory and configure the build and start commands.
-4.  **Environment Variables**: You will be prompted to enter your API keys:
-    *   `MISTRAL_API_KEY`
-    *   `TAVILY_API_KEY`
-5.  **Health Check**: The service uses `/health` for monitoring.
+* MISTRAL_API_KEY
+* TAVILY_API_KEY
 
-### Alternative Deployment (Manual)
+---
 
-If you are not using `render.yaml`, use the following settings:
-- **Build Command**: `pip install -r requirements.txt`
-- **Start Command**: `uvicorn api:app --host 0.0.0.0 --port $PORT`
-- **Environment Variables**: Add `MISTRAL_API_KEY` and `TAVILY_API_KEY`.
+## 📌 Example Use Case
+
+**Input:**
+
+```
+Impact of AI on Indian economy
+```
+
+**Output:**
+
+* Executive Summary
+* Key Findings
+* India-Specific Insights
+* Risks & Uncertainties
+* Conclusion
+* Sources
+
+---
+
+## 🔐 Security Note
+
+* Do NOT commit your `.env` file
+* Always use environment variables for API keys
+
+---
+
+## 🎯 Future Improvements
+
+* 🔄 Streaming responses
+* 📊 Better ranking & reranking
+* 🧠 Memory-based context retention
+* 📦 Docker support
+* 🌍 Multi-language support
+
+---
+
+## 👨‍💻 Author
+
+**Ranveer Singh**
+
+* GitHub: https://github.com/ranveer101
+
+---
+
+

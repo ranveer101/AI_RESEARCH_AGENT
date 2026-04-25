@@ -16,4 +16,4 @@ langchain-mistralai
 langchain-chroma
 langchain-huggingface
 fastapi
-uvicorn
+uvicornlangchain-text-splitters
