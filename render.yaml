@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: ai-research-assistant
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn api:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: MISTRAL_API_KEY
+        sync: false
+      - key: TAVILY_API_KEY
+        sync: false
+      - key: PYTHON_VERSION
+        value: 3.10.12
+
